@@ -1,6 +1,11 @@
 from django.urls import path
 
 from backend.apps.menu.views import index
+from .views import *
+from backend.apps.menu import views
 urlpatterns = [
-    path("", index,name="index"),
+    # path("", index,name="index"),
+    # path('getSubcategory/', get_subcategories, name="get_subcategory")
+    path("", views.IndexPage.as_view(), name="index"),
+    path("product/list/", views.ProductListView.as_view(), name="product_list")
 ]

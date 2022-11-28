@@ -1,6 +1,10 @@
 from django.db import models
 
 # Create your models here.
+
+from backend.apps.accounts.models import User
+
+
 class Category(models.Model):
     name = models.CharField("Название", max_length=100,unique=True)
     slug = models.SlugField("Slug", max_length=120, unique=True)
@@ -34,18 +38,31 @@ class SubCategory(models.Model):
 class Product(models.Model):
     name = models.CharField("Название", max_length=150)
     description = models.TextField("Описание")
-    price = models.DecimalField("Цена", max_digits=6, decimal_places=2)
-    image = models.ImageField("Фото", upload_to = "product_images/")
+    price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
+    image = models.ImageField("Фото", upload_to = "products/img")
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
     subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, related_name="products")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    # is_available = models.
+
+
 
     class Meta:
-        verbose_name = "Мен"
-        verbose_name_plural = "Меню"
-        ordering = ['-created']
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
     
     def __str__(self):
         return self.name
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    # user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    reveiw = models.TextField("Отзыв")
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = ['-created']
+
+    def __str__(self):
+        return f'{self.id}'
+
