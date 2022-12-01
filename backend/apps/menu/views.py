@@ -4,7 +4,7 @@ import json
 # Create your views here.
 from .models import SubCategory
 from django.views.generic import TemplateView, ListView
-from .models import Product
+from .models import Product, Category
 
 def index(request):
     return HttpResponse("<h1> Главная страница </h1>")
@@ -23,4 +23,18 @@ class IndexPage(TemplateView):
 class ProductListView(ListView):
     template_name = "product_list.html" 
     model = Product
-    queryset = Product.objects.all()
+    # queryset = Product.objects.all(
+
+    def get_queryset(self, **kwargs):
+        category = self.kwargs.get("category_slug")
+        if category: 
+            return Product.objects.filter(category__slug=category)
+        return Product.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"]= Category.objects.all()
+        return context
+# class CartPage(ListView):
+#     template_name = "cart.html"
+#     model = Cart

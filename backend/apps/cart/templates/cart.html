@@ -11,27 +11,27 @@
         <title>Cake - Bakery</title>
 
         <!-- Icon css link -->
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="vendors/linearicons/style.css" rel="stylesheet">
-        <link href="vendors/flat-icon/flaticon.css" rel="stylesheet">
-        <link href="vendors/stroke-icon/style.css" rel="stylesheet">
+        <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/static/vendors/linearicons/style.css" rel="stylesheet">
+        <link href="/static/vendors/flat-icon/flaticon.css" rel="stylesheet">
+        <link href="/static/vendors/stroke-icon/style.css" rel="stylesheet">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
         
         <!-- Rev slider css -->
-        <link href="vendors/revolution/css/settings.css" rel="stylesheet">
-        <link href="vendors/revolution/css/layers.css" rel="stylesheet">
-        <link href="vendors/revolution/css/navigation.css" rel="stylesheet">
-        <link href="vendors/animate-css/animate.css" rel="stylesheet">
+        <link href="/static/vendors/revolution/css/settings.css" rel="stylesheet">
+        <link href="/static/vendors/revolution/css/layers.css" rel="stylesheet">
+        <link href="/static/vendors/revolution/css/navigation.css" rel="stylesheet">
+        <link href="/static/vendors/animate-css/animate.css" rel="stylesheet">
         
         <!-- Extra plugin css -->
-        <link href="vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
-        <link href="vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
-        <link href="vendors/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-        <link href="vendors/nice-select/css/nice-select.css" rel="stylesheet">
+        <link href="/static/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
+        <link href="/static/vendors/magnifc-popup/magnific-popup.css" rel="stylesheet">
+        <link href="/static/vendors/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/vendors/nice-select/css/nice-select.css" rel="stylesheet">
         
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/responsive.css" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/responsive.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,7 +91,7 @@
 									</ul>
 								</li>
 								<li><a href="cake.html">Our Cakes</a></li>
-								<li><a href="menu.html">Menu</a></li>
+								<li><a href="{% url 'product_list' %}">Меню</a></li>
 								<li class="dropdown submenu">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
 									<ul class="dropdown-menu">
@@ -129,7 +129,7 @@
 									</ul>
 								</li>
 								<li class="dropdown submenu active">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Покупка</a>
 									<ul class="dropdown-menu">
 										<li><a href="shop.html">Main shop</a></li>
 										<li><a href="product-details.html">Product Details</a></li>
@@ -159,81 +159,80 @@
         	</div>
         </section>
         <!--================End Main Header Area =================-->
-        
+    
         <!--================Cart Table Area =================-->
         <section class="cart_table_area p_100">
-        	<div class="container">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Preview</th>
-								<th scope="col">Product</th>
-								<th scope="col">Price</th>
-								<th scope="col">Quantity</th>
-								<th scope="col">Total</th>
-								<th scope="col"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<img src="img/product/cart-img.jpg" alt="">
-								</td>
-								<td>Wheel Axel</td>
-								<td>$25.00</td>
-								<td>
-									<select class="product_select">
-										<option data-display="1">1</option>
-										<option value="1">2</option>
-										<option value="2">3</option> 
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</td>
-								<td>$25.00</td>
-								<td>X</td>
-							</tr>
-							<tr>
-								<td>
-									<form class="form-inline"> 
-										<div class="form-group"> 
-											<input type="text" class="form-control" placeholder="Coupon code">
-										</div>
-										<button type="submit" class="btn">Apply Coupon</button>
-									</form>
-								</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>
-									<a class="pest_btn" href="#">Add To Cart</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+			
+				<div class="container">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Просмотр</th>
+									<th scope="col">Продукт</th>
+									<th scope="col">Цена</th>
+									<th scope="col">Количество</th>
+									<th scope="col">Итог</th>
+									<!-- <th scope="col"></th> -->
+								</tr>
+							</thead>
+							<tbody>
+								{% for item in cart %}
+								<tr>
+									<td>
+										<img src="{{ item.product.image.url }}" alt="">
+									</td>
+									<td>{{item.product.name}}</td>
+									<td>{{item.product.price}}сом</td>
+									<td>
+										{{item.quantity}}
+									</td>
+									<td>{{item.total_price}} сом</td>
+									<td> <a href="{% url 'delete_cart' item.product.id %}">X </a></td>
+								</tr>
+								{% endfor %}
+								<tr>
+									<td>
+										<form class="form-inline"> 
+											<div class="form-group"> 
+												<input type="text" class="form-control" placeholder="Coupon code">
+											</div>
+											<button type="submit" class="btn">Apply Coupon</button>
+										</form>
+									</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>
+										<a class="pest_btn" href="#">Добавить в корзину</a>
+									</td>
+								</tr>
+							
+							</tbody>
+						</table>
+					</div>
+					<div class="row cart_total_inner">
+						<div class="col-lg-7"></div>
+						<div class="col-lg-5">
+							<div class="cart_total_text">
+								<div class="cart_head">
+									Cart Total
+								</div>
+								<div class="sub_total">
+									<h5>Sub Total <span>$25.00</span></h5>
+								</div>
+								<div class="total">
+									<h4>Итог <span>{{cart.get_total_price}}</span></h4>
+								</div>
+								<div class="cart_footer">
+									<a class="pest_btn" href="#">Proceed to Checkout</a>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-       			<div class="row cart_total_inner">
-        			<div class="col-lg-7"></div>
-        			<div class="col-lg-5">
-        				<div class="cart_total_text">
-        					<div class="cart_head">
-        						Cart Total
-        					</div>
-        					<div class="sub_total">
-        						<h5>Sub Total <span>$25.00</span></h5>
-        					</div>
-        					<div class="total">
-        						<h4>Total <span>$25.00</span></h4>
-        					</div>
-        					<div class="cart_footer">
-        						<a class="pest_btn" href="#">Proceed to Checkout</a>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
+			
         </section>
         <!--================End Cart Table Area =================-->
         
@@ -351,30 +350,30 @@
         
         
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="/static/js/jquery-3.2.1.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="/static/js/popper.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
         <!-- Rev slider js -->
-        <script src="vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
-        <script src="vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-        <script src="vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script src="/static/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+        <script src="/static/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="/static/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+        <script src="/static/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+        <script src="/static/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script src="/static/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script src="/static/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
         <!-- Extra plugin js -->
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="vendors/magnifc-popup/jquery.magnific-popup.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/datetime-picker/js/moment.min.js"></script>
-        <script src="vendors/datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/jquery-ui/jquery-ui.min.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="/static/vendors/magnifc-popup/jquery.magnific-popup.min.js"></script>
+        <script src="/static/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="/static/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="/static/vendors/datetime-picker/js/moment.min.js"></script>
+        <script src="/static/vendors/datetime-picker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/static/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="/static/vendors/jquery-ui/jquery-ui.min.js"></script>
+        <script src="/static/vendors/lightbox/simpleLightbox.min.js"></script>
         
-        <script src="js/theme.js"></script>
+        <script src="/static/js/theme.js"></script>
     </body>
 
 </html>

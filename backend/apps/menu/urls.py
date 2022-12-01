@@ -7,5 +7,7 @@ urlpatterns = [
     # path("", index,name="index"),
     # path('getSubcategory/', get_subcategories, name="get_subcategory")
     path("", views.IndexPage.as_view(), name="index"),
-    path("product/list/", views.ProductListView.as_view(), name="product_list")
+    path("product/list/", views.ProductListView.as_view(), name="product_list"),
+    path("product/list/<slug:category_slug>/", ProductListView.as_view(), name="category_products"),
+    # path("product/list/cart-page", views.P)
 ]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'backend.apps.accounts',
     'backend.apps.order',
     'backend.apps.menu',
+    'backend.apps.cart'
 
 ]
 
@@ -64,6 +65,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                'backend.apps.cart.cart_context.get_cart',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -144,3 +146,6 @@ MEDIA_URL = '/media/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_COOKIE_AGE = 1209600
+CART_SESSION_ID = 'cart' # Уникальный ключ для хранения корзины 
