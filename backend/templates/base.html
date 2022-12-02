@@ -56,7 +56,7 @@
 							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 						</ul>
 						<ul class="h_search list_style">
-							<li class="shop_cart"><a href="#"><i class="lnr lnr-cart"></i></a></li>
+							<li class="shop_cart"><a href="{% url 'cart_detail' %}"><i class="lnr lnr-cart"></i></a></li>
 							<li><a class="popup-with-zoom-anim" href="#test-search"><i class="fa fa-search"></i></a></li>
 						</ul>
 					</div>
@@ -76,17 +76,17 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav justify-content-end">
 								<li class="dropdown submenu active">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-									<ul class="dropdown-menu">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'index' %}" role="button" aria-haspopup="true" aria-expanded="false">Главная</a>
+									<!-- <ul class="dropdown-menu">
 										<li><a href="index.html">Home 1</a></li>
 										<li><a href="index-2.html">Home 2</a></li>
 										<li><a href="index-3.html">Home 3</a></li>
 										<li><a href="index-4.html">Home 4</a></li>
 										<li><a href="index-5.html">Home 5</a></li>
-									</ul>
+									</ul> -->
 								</li>
 								<li><a href="{% url 'product_list' %}">Меню</a></li>
-								<li><a href="menu.html">Menu</a></li>
+								<!-- <li><a href="menu.html">Menu</a></li> -->
 								<li class="dropdown submenu">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About Us</a>
 									<ul class="dropdown-menu">
@@ -122,15 +122,15 @@
 									</ul>
 								</li>
 								<li class="dropdown submenu">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Покупка</a>
 									<ul class="dropdown-menu">
 										<li><a href="shop.html">Main shop</a></li>
-										<li><a href="product-details.html">Product Details</a></li>
+										<li><a href="{% url 'product_detail' %}">Информация о продукте</a></li>
 										<li><a href="{% url 'cart_detail' %}">Корзина</a></li>
 										<li><a href="checkout.html">Checkout Page</a></li>
 									</ul>
 								</li>
-								<li><a href="contact.html">Contact Us</a></li>
+								<!-- <li><a href="contact.html">Contact Us</a></li> -->
 							</ul>
 						</div>
 					</nav>
