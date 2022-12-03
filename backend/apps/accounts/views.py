@@ -41,7 +41,7 @@ class UserRegisterView(CreateView):
 #generic - готовый классы с готовым решением,
 # для стандартных задач
 class RegisterDoneView(TemplateView):
-    template_name = "register_done.html"
+    template_name = "base.html"
 
 
 

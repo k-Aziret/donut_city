@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import json
 # Create your views here.
 from .models import SubCategory
-from django.views.generic import TemplateView, ListView, View
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Product, Category
 
 
@@ -43,3 +43,27 @@ class ProductListView(ListView):
 		
 # 		return render(self.request, "product_details.html")
 
+class ProductDetailView(DetailView):
+    
+    model = Product
+    template_name = "product_details.html"
+    context_object_name = "product"
+
+    def get_context_data(self, pk, **kwargs):
+        product_id = self.kwargs.get('pk')
+        product = Product.objects.get(id=pk)
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+		# product = Product.objects.get(id=pk) 
+
+# def get_product_detail(request, pk):
+#     # try:
+#     #     product = Product.objects.get(id=pk)
+#     # except:
+#     #     pass
+#     # context ={
+#     #     "product":product
+#     # }
+#     # return render(request, 'product_details.html', context)

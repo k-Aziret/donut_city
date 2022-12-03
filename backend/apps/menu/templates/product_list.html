@@ -23,19 +23,20 @@
 			
 				<div class="row product_item_inner">
 					{% for product in object_list %}
-					<div class="col-lg-4 col-md-4 col-6">
-						<div class="cake_feature_item">
-							<div class="cake_img">
-								<a href="{% url 'product_detail' %}"></a>
-								<img src="{{product.image.url}}" alt="">
-							</div>
-							<div class="cake_text">
-								<h4>{{product.price}}</h4>
-								<h3>{{product.name}}</h3>
-								<a class="pest_btn" href="{% url 'add_cart' product.id %}">Добавить в корзину</a>
+						<div class="col-lg-4 col-md-4 col-6">
+							<div class="cake_feature_item">
+								<div class="cake_img">
+
+									<img src="{{product.image.url}}" alt="">
+								</div>
+								<div class="cake_text">
+									<h4>{{product.price}}</h4>
+									<h3>{{product.name}}</h3>
+									<a class="cake_text" href="{% url 'product_detail' product.id %}"> Информация </a>
+									<a class="pest_btn" href="{% url 'add_cart' product.id %}">Добавить в корзину</a>
+								</div>
 							</div>
 						</div>
-					</div>
 					{% endfor %}
 				</div>
 				<div class="product_pagination">
@@ -87,75 +88,7 @@
 							   <a href="#">Filter</a>
 						</div>
 					</aside>
-					<aside class="left_sidebar p_sale_widget">
-						<div class="p_w_title">
-							<h3>Top Sale Products</h3>
-						</div>
-						<div class="media">
-							<div class="d-flex">
-								<img src="/static/img/product/sale-product/s-product-1.jpg" alt="">
-							</div>
-							<div class="media-body">
-								<a href="#"><h4>Brown Cake</h4></a>
-								<ul class="list_style">
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-								</ul>
-								<h5>$29</h5>
-							</div>
-						</div>
-						<div class="media">
-							<div class="d-flex">
-								<img src="img/product/sale-product/s-product-2.jpg" alt="">
-							</div>
-							<div class="media-body">
-								<a href="#"><h4>Brown Cake</h4></a>
-								<ul class="list_style">
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-								</ul>
-								<h5>$29</h5>
-							</div>
-						</div>
-						<div class="media">
-							<div class="d-flex">
-								<img src="img/product/sale-product/s-product-3.jpg" alt="">
-							</div>
-							<div class="media-body">
-								<a href="#"><h4>Brown Cake</h4></a>
-								<ul class="list_style">
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-								</ul>
-								<h5>$29</h5>
-							</div>
-						</div>
-						<div class="media">
-							<div class="d-flex">
-								<img src="img/product/sale-product/s-product-4.jpg" alt="">
-							</div>
-							<div class="media-body">
-								<a href="#"><h4>Brown Cake</h4></a>
-								<ul class="list_style">
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-									<li><a href="#"><i class="fa fa-star-o"></i></a></li>
-								</ul>
-								<h5>$29</h5>
-							</div>
-						</div>
-					</aside>
+					
 				</div>
 			</div>
 		</div>
