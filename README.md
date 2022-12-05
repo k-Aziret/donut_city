@@ -1,2 +1,2 @@
 #  PROJECT FOR ONLINE SERVICE
-# `COFFEE`
+# `COFFEE and Backery`
