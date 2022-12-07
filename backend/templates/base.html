@@ -2,6 +2,12 @@
 <html lang="en">
     
 <head>
+	{% if not request.user.is_authenticated %}
+	<li class="nav-item cta"><a href="{% url 'sign_in' %}" class="nav-link">Войти</a></li>
+	<li class="nav-item cta"><a href="{% url 'register' %}" class="nav-link">Регистрация</a></li>
+	{% else %}
+	<li class="nav-item cta"><a href="{% url 'logout' %}" class="nav-link">Выйти с аккаунта</a></li>
+	{% endif %}
 		{% load static %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,7 +45,7 @@
         <![endif]-->
     </head>
     <body>
-        
+
         <!--================Main Header Area =================-->
 		<header class="main_header_area">
 			<div class="top_header_area row m0">

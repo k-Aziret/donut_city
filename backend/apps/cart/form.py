@@ -10,4 +10,3 @@ class CartAddForm(forms.Form):
 	update = forms.BooleanField(
 		widget=forms.HiddenInput()
 	)
-

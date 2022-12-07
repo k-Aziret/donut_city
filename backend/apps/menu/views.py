@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import json
 # Create your views here.
@@ -6,7 +6,9 @@ from .models import SubCategory
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Product, Category
 
-
+# from django.urls import reverse
+# from .models import Order, OrderItem
+# from .forms import OrderForm
 def index(request):
     return HttpResponse("<h1> Главная страница </h1>")
 
@@ -37,12 +39,6 @@ class ProductListView(ListView):
         context["categories"]= Category.objects.all()
         return context
         
-# class ProductDetailCart(View):
-
-# 	def get(self, request):
-        
-		
-# 		return render(self.request, "product_details.html")
 
 class ProductDetailView(DetailView):
     
@@ -57,12 +53,5 @@ class ProductDetailView(DetailView):
 
 		# product = Product.objects.get(id=pk) 
 
-# def get_product_detail(request, pk):
-#     # try:
-#     #     product = Product.objects.get(id=pk)
-#     # except:
-#     #     pass
-#     # context ={
-#     #     "product":product
-#     # }
-#     # return render(request, 'product_details.html', context)
+
+

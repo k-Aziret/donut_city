@@ -49,3 +49,17 @@ def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('index')
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegisterForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.changed_data['password'])
+            new_user.save()
+            login(request, new_user)
+            return render(request, 'base.html', {'new_user':new_user})
+    else:
+        user_form = UserRegisterForm()
+    return render(request, 'register.html', {'user_form':user_form })
+

@@ -15,7 +15,7 @@
         	</div>
         </section>
         <!--================End Main Header Area =================-->
-    
+	
         <!--================Cart Table Area =================-->
         <section class="cart_table_area p_100">
 			
@@ -88,6 +88,7 @@
 								<div class="total">
 									<h4>Итог <span>{{cart.get_total_price}} cом</span></h4>
 								</div>
+							
 								<div class="cart_footer">
 									<a class="pest_btn" href="{% url 'clear_cart' %}">Очистить</a> 
 									<a class="pest_btn" href="{% url 'purchase' %}">Оформить заказ</a>
