@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from django.views import View
-from django.http import Http404
+from django.http import Http404, JsonResponse
 # Create your views here.
 
 from .form import CartAddForm
@@ -57,3 +57,16 @@ class CartDesign(View):
 # 		cart = Cart(request)
 # 		context = {"cart":cart}
 # 		return render(self.request, "product_details.html", context)
+
+
+class AddOrderView(View):
+
+	form_class = CartAddForm
+
+	def get(self, request, pk):
+		product_id = self.kwargs.get('pk')
+		cart = Cart(request)
+		product = Product.objects.get(id=pk) 
+		cart.add(product=product)
+		return redirect("order")
+

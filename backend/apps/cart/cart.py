@@ -59,3 +59,4 @@ class Cart():
 		else:
 			self.cart[product_id]["quantity"] += quantity
 		self.save()
+	

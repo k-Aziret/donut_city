@@ -18,6 +18,13 @@ def get_subcategories(request):
     category_id=int(id)).values('id', 'name'))
     return  HttpResponse(json.dumps(result), content_type="application/json")
 
+def get_price(request):
+    price = request.GET.get('price', 'id')
+    result = list(Product.objects.filter(
+    price_product=int(price)).values('price','name'))
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
 
 
 class IndexPage(TemplateView):
@@ -54,4 +61,19 @@ class ProductDetailView(DetailView):
 		# product = Product.objects.get(id=pk) 
 
 
+class ProductSearchListView(ListView):
+    template_name = "product_list.html"
+    model = Product
+    
+    def get_queryset(self):
+        search_text = self.request.GET.get("name")
+        if search_text:
+            search_product  = Product.objects.filter(name__icontains = search_text)
+            return search_product
+        return None
 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_text"] = self.request.GET.get("name")
+        return context

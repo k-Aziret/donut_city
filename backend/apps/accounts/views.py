@@ -18,9 +18,10 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
+        name = data['name']
         email = data['email']
         password = data['password']     
-        user = authenticate(email=email, password=password)
+        user = authenticate(email=email, password=password, name=name)
         if user is not None:
             if user.is_active:
                 login(self.request, user)

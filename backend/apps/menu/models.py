@@ -18,6 +18,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class SubCategory(models.Model):
     category = models.ForeignKey(
         Category,
@@ -34,6 +35,8 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.name
+    
+
 
 class Product(models.Model):
     name = models.CharField("Название", max_length=150)
@@ -41,11 +44,7 @@ class Product(models.Model):
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     image = models.ImageField("Фото", upload_to = "products/img")
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
-    # subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, related_name="products")
-
-# class Cart(models.Model):
-#     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
-
+    
     
 
     class Meta:
