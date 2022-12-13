@@ -3,12 +3,16 @@ from django.shortcuts import render, redirect
 from django.views.generic import (
     FormView, 
     CreateView,
-    TemplateView
+    TemplateView,
+    DetailView
     )
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from .forms import LoginForm, UserRegisterForm
+from backend.apps.accounts.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin # Нужен для проверки
+
 
 
 class LoginView(FormView):
@@ -18,10 +22,9 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        name = data['name']
         email = data['email']
         password = data['password']     
-        user = authenticate(email=email, password=password, name=name)
+        user = authenticate(email=email, password=password)
         if user is not None:
             if user.is_active:
                 login(self.request, user)
@@ -64,3 +67,7 @@ def register(request):
         user_form = UserRegisterForm()
     return render(request, 'register.html', {'user_form':user_form })
 
+class UserProfileView(LoginRequiredMixin, DetailView): # LoginRequiredMixin - проверяет залогинен ли юзер
+    template_name = "user_profile.html"
+    model = User
+    queryset = User.objects.all()

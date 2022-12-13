@@ -18,6 +18,14 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class FilterPrice(models.Model):
+    range = models.ValueRange("Range")
+
+    class Meta:
+        verbose_name = "Фильтрация"
+        verbose_name_plural = "Фильтрации"
+
+
 
 class SubCategory(models.Model):
     category = models.ForeignKey(

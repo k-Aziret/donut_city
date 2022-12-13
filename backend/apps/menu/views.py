@@ -4,7 +4,7 @@ import json
 # Create your views here.
 from .models import SubCategory
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Product, Category
+from .models import Product, Category, FilterPrice
 
 # from django.urls import reverse
 # from .models import Order, OrderItem
@@ -19,11 +19,10 @@ def get_subcategories(request):
     return  HttpResponse(json.dumps(result), content_type="application/json")
 
 def get_price(request):
-    price = request.GET.get('price', 'id')
+    id = request.GET.get('id', '')
     result = list(Product.objects.filter(
-    price_product=int(price)).values('price','name'))
+    product_price=int(id)).values('id','price'))
     return HttpResponse(json.dumps(result), content_type="application/json")
-
 
 
 
@@ -37,18 +36,22 @@ class ProductListView(ListView):
 
     def get_queryset(self, **kwargs):
         category = self.kwargs.get("category_slug")
+        price = self.kwargs.get("price_range")
         if category: 
             return Product.objects.filter(category__slug=category)
+        if price:
+            return Product.objects.filter(price__range=price)
         return Product.objects.all()
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"]= Category.objects.all()
+        context["categories"] = Category.objects.all()
+        context["prices"] = FilterPrice.objects.all()
         return context
         
 
 class ProductDetailView(DetailView):
-    
     model = Product
     template_name = "product_details.html"
     context_object_name = "product"
@@ -58,7 +61,6 @@ class ProductDetailView(DetailView):
         context['category'] = Category.objects.all()
         return context
 
-		# product = Product.objects.get(id=pk) 
 
 
 class ProductSearchListView(ListView):

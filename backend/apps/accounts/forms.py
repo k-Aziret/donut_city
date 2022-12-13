@@ -31,11 +31,9 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = [
             'email',
-            # 'phone',
         ]
         form_control = {"class":"form-control"}
         widgets = {
             "email":forms.EmailInput(attrs=form_control),
-            # "phone":forms.TextInput(attrs={"class":"form-control"}),
         
         }

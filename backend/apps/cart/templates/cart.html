@@ -27,7 +27,7 @@
 									<th scope="col">Просмотр</th>
 									<th scope="col">Продукт</th>
 									<th scope="col">Цена</th>
-									<th scope="col">Количество</th>
+									<th scope="col">Количество</th>	
 									<th scope="col">Итог</th>
 									<!-- <th scope="col"></th> -->
 								</tr>
@@ -54,21 +54,6 @@
 									</tr>
 								{% endfor %}
 								<tr>
-									<td>
-										<form class="form-inline"> 
-											<div class="form-group"> 
-												<input type="text" class="form-control" placeholder="Coupon code">
-											</div>
-											<button type="submit" class="btn">Apply Coupon</button>
-										</form>
-									</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>
-										<a class="pest_btn" href="#">Добавить</a>
-									</td>
 									
 								</tr>
 							
@@ -93,6 +78,9 @@
 									<a class="pest_btn" href="{% url 'clear_cart' %}">Очистить</a> 
 									<a class="pest_btn" href="{% url 'purchase' %}" data-bs-target="#modal-report">
 										Оформить заказ</a>
+										{% if not request.user.is_authenticated %}
+											<a href="{% url 'sign_in' %}"></a>
+										{% endif %}
 								</div>
 							</div>
 						</div>
@@ -104,26 +92,24 @@
         
         <!--================Newsletter Area =================-->
         <section class="newsletter_area">
-        	<div class="container">
-        		<div class="row newsletter_inner">
-        			<div class="col-lg-6">
-        				<div class="news_left_text">
-        					<h4>Join our Newsletter list to get all the latest offers, discounts and other benefits</h4>
-        				</div>
-        			</div>
-        			<div class="col-lg-6">
-        				<div class="newsletter_form">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter your email address">
-								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button">Subscribe Now</button>
-								</div>
+			<div class="container">
+				<div class="row newsletter_inner">
+					<div class="col-lg-6">
+						<div class="news_left_text">
+							<h4>Подпишитесь на наш инстаграм</h4>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="newsletter_form">
+							<div class="float-left">
+							
+								<a href="https://www.instagram.com/donut_city_bishkek/"><h4 style="color:aliceblue">donut_city_bishkek <i class="fa fa-instagram" style="color:aliceblue"></h4></i></a>
 							</div>
-        				</div>
-        			</div>
-        		</div>
-        	</div>
-        </section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
         <!--================End Newsletter Area =================-->
  
 {% endblock %}

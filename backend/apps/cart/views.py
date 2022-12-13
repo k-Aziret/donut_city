@@ -52,12 +52,7 @@ class CartDesign(View):
 		context = {"cart":cart}
 		return render(self.request, "contact.html", context)
 
-# class ProductDetail(View):
-# 	def get(self, request):
-# 		cart = Cart(request)
-# 		context = {"cart":cart}
-# 		return render(self.request, "product_details.html", context)
-
+		
 
 class AddOrderView(View):
 

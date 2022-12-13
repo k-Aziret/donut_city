@@ -4,6 +4,7 @@ from django.db import models
 from backend.apps.menu.models import Product
 from backend.apps.accounts.models import User
 
+
 class Order(models.Model):
 	STATUS_NEW = "new"
 	STATUS_CONFIRMED = "confirmed"
@@ -12,8 +13,13 @@ class Order(models.Model):
 		(STATUS_NEW, "Новый "),
 		(STATUS_CONFIRMED, "Подвержден"),
 		(STATUS_REJECTED, "Отменен")
-		
 	)
+	name = models.CharField(max_length=255)
+	address = models.TextField()
+	email = models.EmailField()
+	phone = models.CharField(max_length=20)
+	products = models.ManyToManyField(Product, through='OrderItem')
+
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	phone = models.CharField("Номер телефона", max_length=14)
@@ -26,6 +32,7 @@ class Order(models.Model):
 	def __str__(self):
 		return f"Заказы-{self.id}"
 
+
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, verbose_name="Продукт")
 	order  = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="Заказ")
@@ -34,17 +41,3 @@ class OrderItem(models.Model):
 
 	def __str__(self):
 		return f"{self.id}"
-
-# class Order(models.Model):
-#     name = models.CharField(max_length=255)
-#     address = models.TextField()
-#     email = models.EmailField()
-#     phone = models.CharField(max_length=20)
-#     products = models.ManyToManyField(Product, through='OrderItem')
-
-# class OrderItem(models.Model):
-#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=255)
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
-#     quantity = models.PositiveIntegerField()

@@ -42,7 +42,7 @@
 					<div class="product_pagination">
 						<div class="left_btn">
 							{% if page_obj.has_previous %}
-								<li class="page-item {% if not page_previous %} active {% endif %}"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Назад</a></li>
+								<li class=" {% if not page_previous %} active {% endif %}"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Назад</a></li>
 							{% endif %}
 							<!-- <a href="#"><i class="lnr lnr-arrow-left"></i> New posts</a>  -->
 						</div>
@@ -78,12 +78,6 @@
 				<div class="col-lg-3">
 					<div class="product_left_sidebar">
 						<aside class="left_sidebar search_widget">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter Search Keywords">
-								<div class="input-group-append">
-									<button class="btn" type="button"><i class="icon icon-Search"></i></button>
-								</div>
-							</div>
 						</aside>
 						<aside class="left_sidebar p_catgories_widget">
 							<div class="p_w_title">
@@ -99,19 +93,12 @@
 						<aside class="left_sidebar p_price_widget">
 							<div class="p_w_title">
 								<h3>Фильтрация по ценам</h3>
-								<ul class="list_style">
-									{% for category in categories %}
-									<li><a href="{% url 'price_product' category.slug %}">{{category.price}}</a></li>
-									{% endfor %}
-								</ul>
-							</div>
-							<div class="filter_price">
-								<div id="slider-range"></div>
-								<label for="amount">Price range:</label>
-								<input type="text" id="amount" readonly />
-								{% for category in categories %}
-									<a href="{% url 'price_product' category.slug %}">{{category.price}}</a>
-								{% endfor %}
+								<div class="filter_price">
+									<div id="slider-range"></div>
+       								<label for="amount">Price range:</label>
+									<input type="text" id="amount" readonly />
+       								<a href="#">Фильтрация</a>
+        						</div>
 							</div>
 						</aside>
 						
