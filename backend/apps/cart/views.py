@@ -7,6 +7,8 @@ from django.http import Http404, JsonResponse
 from .form import CartAddForm
 from .cart import Cart
 from backend.apps.menu.models import Product
+from backend.apps.cart.form import OrderForm
+from django.views.generic import CreateView
 
 class AddCartView(View):
 
@@ -18,12 +20,11 @@ class AddCartView(View):
 		product = Product.objects.get(id=pk) 
 		cart.add(product=product)
 		return redirect("cart_detail")
-
 class CartDetailView(View):
 
 	def get(self, request):
-		cart = Cart(request)
-		context = {"cart":cart}
+		form = OrderForm(request)
+		context = {"form":form}
 		return render(self.request, "cart.html", context)
 
 
@@ -48,11 +49,11 @@ class ClearCartView(View):
 class CartDesign(View):
 
 	def get(self, request):
-		cart = Cart(request)
-		context = {"cart":cart}
+		form = OrderForm(request)
+		context = {"form":form}
 		return render(self.request, "contact.html", context)
 
-		
+
 
 class AddOrderView(View):
 
@@ -65,3 +66,6 @@ class AddOrderView(View):
 		cart.add(product=product)
 		return redirect("order")
 
+class OrderCreateView(CreateView):
+	form_class = OrderForm
+	template_name = "contact.html"

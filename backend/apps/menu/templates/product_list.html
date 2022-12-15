@@ -5,10 +5,10 @@
 	<section class="banner_area">
 		<div class="container">
 			<div class="banner_text">
-				<h3>Shop</h3>
+				<h3>Покупка</h3>
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="shop.html">Shop</a></li>
+					<li><a href="{% url 'index' %}">Главная</a></li>
+					<li><a href="{% url 'product_list' %}">Покупки</a></li>
 				</ul>
 			</div>
 		</div>
@@ -90,7 +90,7 @@
 							</ul>
 							
 						</aside>
-						<aside class="left_sidebar p_price_widget">
+						<!-- <aside class="left_sidebar p_price_widget">
 							<div class="p_w_title">
 								<h3>Фильтрация по ценам</h3>
 								<div class="filter_price">
@@ -100,7 +100,7 @@
        								<a href="#">Фильтрация</a>
         						</div>
 							</div>
-						</aside>
+						</aside> -->
 						
 					</div>
 				</div>
